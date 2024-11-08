@@ -7,6 +7,7 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
@@ -26,7 +27,7 @@ public class RobotContainer {
   private final Intake intake = new Intake();
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Drive drive = new Drive();
-
+  private final Arm arm = new Arm();
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
@@ -57,6 +58,11 @@ public class RobotContainer {
     () -> intake.stopMotor(), intake));
     drive.setDefaultCommand(Commands.run( () -> drive.arcadeDrive(m_driverController.getLeftY(), 
     m_driverController.getRightX())));
+    //button for arm
+    m_driverController.x().whileTrue(Commands.startEnd(() -> arm.armUp(),
+    () -> arm.armStop(), arm));
+    m_driverController.y().whileTrue(Commands.startEnd(() -> arm.armDown(),
+    () -> arm.armStop(), arm));
   }
 
   /**
