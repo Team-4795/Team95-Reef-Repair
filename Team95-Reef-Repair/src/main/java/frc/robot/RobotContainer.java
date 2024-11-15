@@ -62,7 +62,11 @@ public class RobotContainer {
     m_driverController.x().whileTrue(Commands.startEnd(() -> arm.armUp(),
     () -> arm.armStop(), arm));
     m_driverController.y().whileTrue(Commands.startEnd(() -> arm.armDown(),
-    () -> arm.armStop(), arm));
+      () -> arm.armStop(), arm));
+    
+      m_driverController.y().whileTrue(Commands.startEnd(() -> arm.armDown(),
+      () -> arm.armStop(), arm).andThen(Commands.sequence(Commands.run(()-> intake.motorForward()), Commands.waitSeconds(
+      2), Commands.run( ()-> intake.stopMotor()))));
   }
 
   /**
