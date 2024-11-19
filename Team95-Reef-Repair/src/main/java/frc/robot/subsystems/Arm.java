@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.motorcontrol.PWMTalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase{
-    private PWMTalonSRX armMotor = new PWMTalonSRX(3); //change the number
+    private PWMTalonSRX armMotor = new PWMTalonSRX(2); //change the number
     public Arm(){
 
     }
