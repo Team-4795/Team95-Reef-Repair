@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -13,8 +15,24 @@ public final class Autos {
   /** Example static factory for an autonomous command. */
   public static Command exampleAuto(ExampleSubsystem m_exampleSubsystem) {
     return Commands.sequence(m_exampleSubsystem.exampleMethodCommand(), new ExampleCommand(m_exampleSubsystem));
-  }
 
+  }
+    public static Command taxiAuto(Drive drive) {
+    return Commands.sequence(
+      Commands.run(() -> drive.arcadeDrive(0.5, 0)), 
+      Commands.waitSeconds(2), 
+      Commands.run( () -> drive.arcadeDrive(0,0)));
+
+  }
+  public static Command dropAuto(Arm arm,Drive drive, Intake intake){
+   return Commands.sequence(Autos.taxiAuto(drive),
+   Commands.run(()->arm.armDown()),
+   Commands.waitSeconds(2),
+   Commands.run(() -> arm.armStop()),
+   Commands.run(()-> intake.motorForward()),
+   Commands.waitSeconds(1),
+   Commands.run(() -> intake.stopMotor())   );
+  }
   private Autos() {
     throw new UnsupportedOperationException("This is a utility class!");
   }
