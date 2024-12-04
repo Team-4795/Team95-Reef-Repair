@@ -33,6 +33,9 @@ public final class Autos {
    Commands.waitSeconds(1),
    Commands.run(() -> intake.stopMotor())   );
   }
+  public static Command thomasAuto(Arm arm, Drive drive, Intake intake){
+    return Commands.sequence();
+  }
   private Autos() {
     throw new UnsupportedOperationException("This is a utility class!");
   }
