@@ -52,19 +52,19 @@ public class RobotContainer {
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    m_driverController.b().whileTrue(Commands.startEnd(() -> intake.motorForward(),
+    m_driverController.a().whileTrue(Commands.startEnd(() -> intake.motorForward(),
     () -> intake.stopMotor(), intake));
-    m_driverController.a().whileTrue(Commands.startEnd(() -> intake.motorBackward(),
+    m_driverController.b().whileTrue(Commands.startEnd(() -> intake.motorBackward(),
     () -> intake.stopMotor(), intake));
     drive.setDefaultCommand(Commands.run( () -> drive.arcadeDrive(m_driverController.getLeftY(), 
     m_driverController.getRightX()), drive));
     //button for arm
-    m_driverController.x().whileTrue(Commands.startEnd(() -> arm.armUp(),
+    m_driverController.rightTrigger().whileTrue(Commands.startEnd(() -> arm.armUp(),
     () -> arm.armStop(), arm));
-    m_driverController.y().whileTrue(Commands.startEnd(() -> arm.armDown(),
+    m_driverController.leftTrigger().whileTrue(Commands.startEnd(() -> arm.armDown(),
       () -> arm.armStop(), arm));
     
-      m_driverController.y().whileTrue(Commands.startEnd(() -> arm.armDown(),
+      m_driverController.leftTrigger().whileTrue(Commands.startEnd(() -> arm.armDown(),
       () -> arm.armStop(), arm).andThen(Commands.sequence(Commands.run(()-> intake.motorForward()), Commands.waitSeconds(
       2), Commands.run( ()-> intake.stopMotor()))));
   }

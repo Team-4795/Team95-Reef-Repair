@@ -17,21 +17,48 @@ public final class Autos {
     return Commands.sequence(m_exampleSubsystem.exampleMethodCommand(), new ExampleCommand(m_exampleSubsystem));
 
   }
-    public static Command taxiAuto(Drive drive) {
-    return Commands.sequence(
-      Commands.run(() -> drive.arcadeDrive(0.5, 0)), 
-      Commands.waitSeconds(2), 
-      Commands.run( () -> drive.arcadeDrive(0,0)));
 
+  public static Command dropAuto(Arm arm, Drive drive, Intake intake){
+    return Commands.sequence(
+      Commands.run(()->arm.armUp()),
+      Commands.waitSeconds(2), //Change the time
+      Commands.run(()->arm.armStop()),
+      Commands.run(()->intake.motorForward()),
+      Commands.waitSeconds(1),//change time
+      Commands.run(()->intake.stopMotor()), 
+      Commands.parallel(Commands.run(()-> arm.armDown()),Commands.run(()->drive.arcadeDrive(0.5,0))),
+      Commands.waitSeconds(2),
+      Commands.run(()->arm.armStop()),
+      Commands.run(()->intake.motorBackward()),
+      Commands.waitSeconds(2),
+      Commands.parallel(Commands.run(()->arm.armStop()),Commands.run(()->drive.arcadeDrive(0,0)))
+      //How are we going to end this, do we have to end? since it will switch to teleop
+      
+          );
   }
-  public static Command dropAuto(Arm arm,Drive drive, Intake intake){
-   return Commands.sequence(Autos.taxiAuto(drive),
+
+
+
+
+
+  public static Command deezballs(Arm arm,Drive drive, Intake intake){
+   return Commands.sequence(
    Commands.run(()->arm.armDown()),
    Commands.waitSeconds(2),
    Commands.run(() -> arm.armStop()),
    Commands.run(()-> intake.motorForward()),
    Commands.waitSeconds(1),
-   Commands.run(() -> intake.stopMotor())   );
+   Commands.run(() -> intake.stopMotor()));
+  }
+  public static Command taxiAuto(Drive drive) {
+    return Commands.sequence(
+      Commands.run(() -> drive.arcadeDrive(0.5, 0)), 
+      Commands.waitSeconds(2), 
+      Commands.run( () -> drive.arcadeDrive(0,0)));
+  }
+
+  public static Command ThomasAuto(Arm arm, Drive drive, Intake intake){
+    return Commands.sequence();
   }
   private Autos() {
     throw new UnsupportedOperationException("This is a utility class!");

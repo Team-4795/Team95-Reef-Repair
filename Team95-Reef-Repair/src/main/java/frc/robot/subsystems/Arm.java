@@ -9,10 +9,10 @@ public class Arm extends SubsystemBase{
 
     }
     public void armUp(){
-        armMotor.set(0.5); //change the number
+        armMotor.set(0.3); //change the number
     }
     public void armDown(){
-        armMotor.set(-0.5); //change the number
+        armMotor.set(-0.3); //change the number
     }
     public void armStop(){
         armMotor.set(0);
