@@ -56,8 +56,12 @@ public class RobotContainer {
     () -> intake.stopMotor(), intake));
     m_driverController.b().whileTrue(Commands.startEnd(() -> intake.motorBackward(),
     () -> intake.stopMotor(), intake));
-    drive.setDefaultCommand(Commands.run( () -> drive.arcadeDrive(m_driverController.getLeftY(), 
-    m_driverController.getRightX()), drive));
+    
+
+    drive.setDefaultCommand(Commands.run(() -> drive.arcadeDrive(m_driverController.getRightX(), 
+    m_driverController.getLeftY()), drive));
+
+
     //button for arm
     m_driverController.rightTrigger().whileTrue(Commands.startEnd(() -> arm.armUp(),
     () -> arm.armStop(), arm));

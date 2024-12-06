@@ -60,6 +60,9 @@ public final class Autos {
   public static Command ThomasAuto(Arm arm, Drive drive, Intake intake){
     return Commands.sequence();
   }
+  public static Command thomasAuto(Arm arm, Drive drive, Intake intake){
+    return Commands.sequence();
+  }
   private Autos() {
     throw new UnsupportedOperationException("This is a utility class!");
   }
